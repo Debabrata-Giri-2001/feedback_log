@@ -24,9 +24,10 @@ import { ApiResponce } from '@/types/ApiResponce';
 type MessageCardProps = {
     message: Message;
     onMessageDelete: (messageId: string) => void;
+    key: number;
 }
 
-const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
+const MessageCard = ({ message, onMessageDelete, key }: MessageCardProps) => {
 
     const { toast } = useToast();
 
