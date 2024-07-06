@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
-import bcryptjs from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -23,17 +23,16 @@ export const authOption: NextAuthOptions = {
           const user = await UserModel.findOne({
             $or: [
               { email: credentials.identifier },
-              { userName: credentials.identifier },
+              { username: credentials.identifier },
             ],
           });
           if (!user) {
             throw new Error("user not fount with this email");
           }
-          if (user?.isVerified) {
+          if (!user.isVerified) {
             throw new Error("user not verified");
           }
-
-          const isPasswordCorrect = await bcryptjs.compare(
+          const isPasswordCorrect = await bcrypt.compare(
             credentials?.password,
             user?.password
           );
@@ -55,7 +54,8 @@ export const authOption: NextAuthOptions = {
         session.user._id = token._id;
         session.user.isVerified = token?.isVerified;
         session.user.isAcceptingMessage = token?.isAcceptingMessage;
-        session.user.username = token?.username; 
+        session.user.username = token?.username;
+        session.user.email = token?.email;
       }
       return session;
     },
@@ -65,6 +65,7 @@ export const authOption: NextAuthOptions = {
         token.isVerified = user?.isVerified;
         token.isAcceptingMessage = user?.isAcceptingMessage;
         token.username = user?.username;
+        token.email = user?.email;
       }
       return token;
     },

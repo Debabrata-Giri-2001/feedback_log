@@ -28,6 +28,7 @@ export const config = {
     '/sign-up',
     '/',
     '/dashboard/:path*',
-    '/verify/:path*'
+    '/verify/:path*',
+    '/((?!api|_next|.*\\..*).*)',
   ],
 }

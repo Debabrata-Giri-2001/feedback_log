@@ -41,7 +41,7 @@ const page = () => {
     const fetchAcceptMessages = useCallback(async () => {
         setIsSwitchLoading(true);
         try {
-            const response = await axios.get<ApiResponce>('/api/accept-messages');
+            const response = await axios.get<ApiResponce>('/api/accept-message');
             setValue('acceptMessages', response.data.isAccesptingMessages);
         } catch (error) {
             const axiosError = error as AxiosError<ApiResponce>;
@@ -112,11 +112,12 @@ const page = () => {
         }
     }
 
-    const username  = session?.user as User;
-
-    const baseUrl = `${window.location.protocol}//${window.location.host}`;
-    const profileUrl = `${baseUrl}/u/${username}`;
-  
+    const username = session?.user as User;
+    let baseUrl = '';
+    if (typeof window !== 'undefined') {
+        baseUrl = `${window.location.protocol}//${window.location.host}`;
+    }
+    const profileUrl = `${baseUrl}/u/${username?.username}`;
 
     if (!session || !session.user) {
         return <div>Please Login</div>;
@@ -125,11 +126,11 @@ const page = () => {
     const copyToClipboard = () => {
         navigator.clipboard.writeText(profileUrl);
         toast({
-          title: 'URL Copied!',
-          description: 'Profile URL has been copied to clipboard.',
+            title: 'URL Copied!',
+            description: 'Profile URL has been copied to clipboard.',
         });
-      };
-    
+    };
+
 
     return (
         <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
