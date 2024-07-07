@@ -19,7 +19,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { signInSchema } from '@/schemas/signInSchema';
 
 
-const page = () => {
+const SignIn = () => {
 
     const router = useRouter();
     const { toast } = useToast();
@@ -109,4 +109,4 @@ const page = () => {
     )
 }
 
-export default page
+export default SignIn;

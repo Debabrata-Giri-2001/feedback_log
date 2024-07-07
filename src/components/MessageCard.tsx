@@ -23,7 +23,7 @@ import { ApiResponce } from '@/types/ApiResponce';
 
 type MessageCardProps = {
     message: Message;
-    onMessageDelete: (messageId: string) => void;
+    onMessageDelete: (messageId: string | any) => void;
     key: number;
 }
 
@@ -39,7 +39,7 @@ const MessageCard = ({ message, onMessageDelete, key }: MessageCardProps) => {
             toast({
                 title: response.data.message,
             });
-            // onMessageDelete(message._id);
+            onMessageDelete(message._id);
 
         } catch (error) {
             const axiosError = error as AxiosError<ApiResponce>;

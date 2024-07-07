@@ -4,7 +4,7 @@ import dbConnect from "@/lib/dbConnect";
 import { User } from "next-auth";
 import { authOption } from "../../auth/[...nextauth]/options";
 
-export async function POST(
+export async function DELETE(
   request: Request,
   { params }: { params: { messageid: string } }
 ) {

@@ -18,7 +18,7 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { verifySchema } from '@/schemas/verifySchema';
 
-const page = () => {
+const Verify = () => {
 
   const router = useRouter();
   const params = useParams<{ username: string }>();
@@ -84,4 +84,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Verify

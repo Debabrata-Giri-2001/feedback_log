@@ -16,8 +16,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { acceptMessageSchema } from '@/schemas/acceptMessageSchema';
 
-const page = () => {
-
+const Dashboard = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isSwitchLoading, setIsSwitchLoading] = useState(false);
@@ -42,7 +41,7 @@ const page = () => {
         setIsSwitchLoading(true);
         try {
             const response = await axios.get<ApiResponce>('/api/accept-message');
-            setValue('acceptMessages', response.data.isAccesptingMessages);
+            setValue('acceptMessages', response.data.isAcceptingMessages);
         } catch (error) {
             const axiosError = error as AxiosError<ApiResponce>;
             toast({
@@ -63,7 +62,7 @@ const page = () => {
         setIsSwitchLoading(false);
         try {
             const response = await axios.get<ApiResponce>('/api/get-messages');
-            setMessages(response.data.messages || []);
+            setMessages(response.data.message.messages || []);
             if (refresh) {
                 toast({
                     title: 'Refreshed Messages',
@@ -88,14 +87,15 @@ const page = () => {
         if (!session || !session.user) return;
         fetchMessages()
         fetchAcceptMessages()
-    }, [session, setValue, toast, fetchAcceptMessages, fetchMessages]);
+    }, [session, fetchAcceptMessages, fetchMessages]);
 
     const handleSwitchChange = async () => {
         try {
-            const response = await axios.post<ApiResponce>('/api/accept-messages', {
-                acceptMessages: !acceptMessages,
+            const newAcceptMessagesState = !acceptMessages;
+            const response = await axios.post<ApiResponce>('/api/accept-message', {
+                acceptMessages: newAcceptMessagesState,
             });
-            setValue('acceptMessages', !acceptMessages);
+            setValue('acceptMessages', newAcceptMessagesState);
             toast({
                 title: response.data.message,
                 variant: 'default',
@@ -193,4 +193,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Dashboard;

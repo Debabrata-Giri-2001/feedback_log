@@ -24,7 +24,7 @@ import { useRouter } from 'next/navigation';
 import { signUpSchema } from '@/schemas/signUpSchema';
 
 
-const page = () => {
+const SignUp = () => {
 
   const [username, setUsername] = useState('');
   const [usernameMessage, setUsernameMessage] = useState('');
@@ -186,4 +186,4 @@ const page = () => {
   )
 }
 
-export default page
+export default SignUp

@@ -9,16 +9,22 @@ export async function middleware(request: NextRequest) {
     const token = await getToken({req:request})
     const url = request.nextUrl;
 
-    if (token && (
-        url.pathname.startsWith('/sign-in') ||
-        url.pathname.startsWith('/sign-up') ||
-        url.pathname.startsWith('/verify')  ||
-        url.pathname.startsWith('/')  
-    )) {
-        return NextResponse.redirect(new URL('/dashboard', request.url))
+  if (token) {
+    if (
+      url.pathname === '/sign-in' ||
+      url.pathname === '/sign-up' ||
+      url.pathname === '/verify' ||
+      url.pathname === '/'
+    ) {
+      return NextResponse.redirect(new URL('/dashboard', request.url));
     }
+  } else {
+    if (url.pathname.startsWith('/dashboard')) {
+      return NextResponse.redirect(new URL('/sign-in', request.url));
+    }
+  }
 
-//   return NextResponse.redirect(new URL('/', request.url))
+  return NextResponse.next();
 }
  
 // See "Matching Paths" below to learn more
