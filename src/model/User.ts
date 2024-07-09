@@ -23,8 +23,8 @@ export interface User extends Document {
   username: string;
   email: string;
   password: string;
-  varifyCode: string;
-  varifyCodeExpiry: Date;
+  verifyCode: string;
+  verifyCodeExpiry: Date;
   isVerified: boolean;
   isAcceptingMessage: boolean;
   messages: Message[];
@@ -33,7 +33,7 @@ export interface User extends Document {
 const userSchema: Schema<User> = new Schema({
   username: {
     type: String,
-    required: [true, "user name is required"],
+    required: [true, "username is required"],
     trim: true,
     unique: true,
   },
@@ -47,13 +47,13 @@ const userSchema: Schema<User> = new Schema({
     type: String,
     required: [true, "password is required"],
   },
-  varifyCode: {
+  verifyCode: {
     type: String,
-    required: [true, "varify Code is required"],
+    required: [true, "verify Code is required"],
   },
-  varifyCodeExpiry: {
+  verifyCodeExpiry: {
     type: Date,
-    required: [true, "varify Code Expiry  is required"],
+    required: [true, "verify Code Expiry is required"],
   },
   isVerified: {
     type: Boolean,

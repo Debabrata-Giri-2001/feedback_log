@@ -30,7 +30,7 @@ export async function POST(request: Request) {
       email,
     });
 
-    const varifyCode = Math.floor(10000 + Math.random() * 900000).toString();
+    const verifyCode = Math.floor(10000 + Math.random() * 900000).toString();
 
     if (exitingUserByEmail) {
       if (exitingUserByEmail.isVerified) {
@@ -43,29 +43,26 @@ export async function POST(request: Request) {
             status: 400,
           }
         );
-      }else{
+      } else {
         const hasedPassword = await bcryptjs.hash(password, 10);
         exitingUserByEmail.password = hasedPassword;
-        exitingUserByEmail.varifyCode = varifyCode;
-        exitingUserByEmail.varifyCodeExpiry = new Date(Date.now() +  3600000);
+        exitingUserByEmail.verifyCode = verifyCode;
+        exitingUserByEmail.verifyCodeExpiry = new Date(Date.now() + 3600000);
 
-
-        await exitingUserByEmail.save()
-
+        await exitingUserByEmail.save();
       }
-
-
     } else {
       const hasedPassword = await bcryptjs.hash(password, 10);
-      const expiryDate = new Date();
-      expiryDate.setHours(expiryDate.getHours() + 1);
+      const currentTime = new Date();
+      const expiryDate = new Date(currentTime.getTime()+360000);
+
 
       const newUser = new UserModel({
         username: username,
         email,
         password: hasedPassword,
-        varifyCode,
-        varifyCodeExpiry: expiryDate,
+        verifyCode,
+        verifyCodeExpiry: expiryDate,
         isVerified: false,
         isAcceptingMessage: true,
         messages: [],
@@ -79,7 +76,7 @@ export async function POST(request: Request) {
     const emailResponse = await sendVerificationEmail(
       email,
       username,
-      varifyCode
+      verifyCode
     );
 
     if (!emailResponse.success) {
