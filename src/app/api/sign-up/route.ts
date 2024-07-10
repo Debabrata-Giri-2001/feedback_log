@@ -2,6 +2,7 @@ import UserModel from "@/model/User";
 import dbConnect from "@/lib/dbConnect";
 import bcryptjs from "bcryptjs";
 import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
+import { sendVerifyCode } from "@/helpers/sendVerifyCode";
 
 export async function POST(request: Request) {
   await dbConnect();
@@ -53,8 +54,8 @@ export async function POST(request: Request) {
       }
     } else {
       const hasedPassword = await bcryptjs.hash(password, 10);
-      const currentTime = new Date();
-      const expiryDate = new Date(currentTime.getTime()+360000);
+      const expiryDate = new Date();
+      expiryDate.setDate(expiryDate.getDate() + 1);
 
 
       const newUser = new UserModel({
@@ -73,7 +74,7 @@ export async function POST(request: Request) {
 
     // send verification email
 
-    const emailResponse = await sendVerificationEmail(
+    const emailResponse = await sendVerifyCode(
       email,
       username,
       verifyCode

@@ -15,7 +15,7 @@ interface VerificationEmailProps {
     otp: string;
 }
 
-export default function VerificationEmail({ username, otp }: VerificationEmailProps) {
+export const VarificationEmail: React.FC<VerificationEmailProps> = ({ username, otp }) =>{
     return (
         <Html lang="en" dir="ltr">
             <Head>
