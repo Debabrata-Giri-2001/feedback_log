@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { ApiResponce } from '@/types/ApiResponce';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -75,8 +75,9 @@ const SignUp = () => {
         title: 'Success',
         description: response.data.message,
       });
-
-      router.replace(`/verify/${username}`);
+      if (response?.status == 201) {
+        router.replace(`/verify/${username}`);
+      }
 
       setIsSubmitting(false);
 

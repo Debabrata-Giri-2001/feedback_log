@@ -25,13 +25,15 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { messageSchema } from '@/schemas/messageSchema';
 
-const specialChar = '||';
 
-const parseStringMessages = (messageString: string): string[] => {
-  return messageString.split(specialChar);
-};
 
 const UserForm = () => {
+
+  const specialChar = '||';
+
+  const parseStringMessages = (messageString: string): string[] => {
+    return messageString.split(specialChar);
+  };
 
   const params = useParams<{ username: string }>();
   const username = params.username;
@@ -141,7 +143,7 @@ const UserForm = () => {
             <Button
               className="my-4"
               variant="outline"
-              onClick={()=>{
+              onClick={() => {
 
               }}
             >
@@ -178,7 +180,9 @@ const UserForm = () => {
       </div>
       <Separator className="my-6" />
       <div className="text-center">
-        <div className="mb-4">Get Your Message Board</div>
+        <div className="mb-4">
+          <p>Get Your Message Board</p>
+        </div>
         <Link href={'/sign-up'}>
           <Button>Create Your Account</Button>
         </Link>

@@ -1,5 +1,4 @@
 import { sendEmailsCode } from "@/app/api/send-email/sendEmailsCode";
-import { VarificationEmail } from "../../emails/VarificationEmail";
 
 export async function sendVerifyCode(
   email: string,

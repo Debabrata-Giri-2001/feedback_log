@@ -15,6 +15,7 @@ import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { acceptMessageSchema } from '@/schemas/acceptMessageSchema';
+import Home from '../page';
 
 const Dashboard = () => {
     const [messages, setMessages] = useState<Message[]>([]);
@@ -72,10 +73,10 @@ const Dashboard = () => {
         } catch (error) {
             const axiosError = error as AxiosError<ApiResponce>;
             toast({
-                title: 'Error',
+                title: '',
                 description:
                     axiosError.response?.data.message ?? 'Failed to fetch messages',
-                variant: 'destructive',
+                variant: 'default',
             });
         } finally {
             setIsLoading(false);
@@ -120,7 +121,7 @@ const Dashboard = () => {
     const profileUrl = `${baseUrl}/u/${username?.username}`;
 
     if (!session || !session.user) {
-        return <div>Please Login</div>;
+        return (<Home />);
     }
 
     const copyToClipboard = () => {

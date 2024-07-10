@@ -13,7 +13,7 @@ import {
 
 export default function Home() {
   return (
-    <>
+    <div>
       {/* main */}
       <main className="flex-grow flex flex-col items-center justify-center px-4 md:px-24 py-12 bg-gray-800 text-white h-screen">
         <section className="text-center mb-8 md:mb-12">
@@ -57,6 +57,6 @@ export default function Home() {
       <footer className="text-center p-4 md:p-6 bg-gray-900 text-white">
         © 2023 True Feedback. All rights reserved.
       </footer>
-    </>
+    </div>
   );
 }
