@@ -8,5 +8,6 @@ also this porject deployed in vresal here is the link 🔗
 
 clone and try
 ```bash
+yarn
 npm run dev
 ```
