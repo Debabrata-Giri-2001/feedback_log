@@ -2,7 +2,7 @@
 
 clone this poject and try it-  `https://github.com/Debabrata-Giri-2001/feedback_log.git`
 
-also this porject deployed in vresal here is the link 🔗
+This porject deployed in vresal here is the link 🔗
 
 `https://feedback-log-five.vercel.app/`
 
