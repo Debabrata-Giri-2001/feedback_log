@@ -2,12 +2,12 @@
 
 clone this poject and try it-  `https://github.com/Debabrata-Giri-2001/feedback_log.git`
 
-also this porject deployed in vresal here is the link 🔗
+This porject deployed in vresal here is the link 🔗
 
-`https://feedback-e6x2s01yx-debabrata-giri-2001s-projects.vercel.app`
-
+`https://feedback-log-five.vercel.app/`
 
 clone and try
 ```bash
+yarn
 npm run dev
 ```
